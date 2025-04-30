@@ -7,16 +7,16 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 463470969380.dkr.ecr.us-east-1.amazonaws.com
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 463470969380.dkr.ecr.us-east-1.amazonaws.com/github-codebuilder
   build:
     commands:
       - echo Building the Docker image...
       - docker build -t nodejs .
-      - docker tag nodejs:latest 463470969380.dkr.ecr.us-east-1.amazonaws.com/nodejs:latest
+      - docker tag nodejs:latest 463470969380.dkr.ecr.us-east-1.amazonaws.com/github-codebuilder:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push 463470969380.dkr.ecr.us-east-1.amazonaws.com/nodejs:latest
+      - docker push 463470969380.dkr.ecr.us-east-1.amazonaws.com/github-codebuilder:latest
 artifacts:
   files: []
 
