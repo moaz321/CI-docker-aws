@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 463470969380.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t nodejs .
+      - docker tag nodejs:latest 463470969380.dkr.ecr.us-east-1.amazonaws.com/nodejs:latest
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push 463470969380.dkr.ecr.us-east-1.amazonaws.com/nodejs:latest
+artifacts:
+  files: []
+
