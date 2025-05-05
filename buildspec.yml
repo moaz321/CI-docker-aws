@@ -1,8 +1,8 @@
 version: 0.2
 
-phases:
-  pre_build:
-    commands:
+#phases:
+  #pre_build:
+    #commands:
       - echo Checking AWS CLI version...
       - aws --version
       - echo Verifying IAM role...
@@ -11,19 +11,19 @@ phases:
       - aws ecr get-login-password --region us-east-1 > password.txt
       - cat password.txt | docker login --username AWS --password-stdin 463470969380.dkr.ecr.us-east-1.amazonaws.com/github-codebuilder
 
-  install:
+  #install:
     runtime-versions:
       docker: 18
   
-  build:
-    commands:
+  #build:
+    #commands:
       - echo Building the Docker image...
       - docker build -t nodejs .
       - docker tag nodejs:latest 463470969380.dkr.ecr.us-east-1.amazonaws.com/github-codebuilder:latest
-  post_build:
-    commands:
+  #post_build:
+    #commands:
       - echo Pushing the Docker image...
       - docker push 463470969380.dkr.ecr.us-east-1.amazonaws.com/github-codebuilder:latest
-artifacts:
+#artifacts:
   files: []
 
